@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <h1>Product Catalog</h1>
+        <p>Explore our electronics store</p>
+    </header>
+
+    <main class="layout">
+
+        <!-- MAIN EXERCISE: PRODUCT TABLE -->
+        <section class="catalog">
+            <h2>Available Products</h2>
+            <p id="product-count">Count: 1000</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Availability</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="products-body">
+                    <!-- Generate product rows using JavaScript -->
+                </tbody>
+            </table>
+
+            <!-- BONUS 2: ADD PRODUCT FORM -->
+            <section class="add-product">
+                <h2>Add New Product</h2>
+                <p>Fill in the information below to add a product.</p>
+
+                <form id="product-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="product-name">Product Name</label>
+                            <input type="text" id="product-name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-category">Category</label>
+                            <select id="product-category" required>
+                                <option value="">Select a category</option>
+                                <option value="Accessories">Accessories</option>
+                                <option value="Connectivity">Connectivity</option>
+                                <option value="Displays">Displays</option>
+                                <option value="Audio">Audio</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-price">Price (€)</label>
+                            <input type="number" id="product-price" min="0.01" step="0.01" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-brand">Brand</label>
+                            <input type="text" id="product-brand" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-color">Color</label>
+                            <input type="text" id="product-color" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-warranty">Warranty (months)</label>
+                            <input type="number" id="product-warranty" min="0" step="1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-store-stock">Store Stock</label>
+                            <input type="number" id="product-store-stock" min="0" step="1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-warehouse-stock">Warehouse Stock</label>
+                            <input type="number" id="product-warehouse-stock" min="0" step="1" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="product-tags">Tags (separated by commas)</label>
+                            <input type="text" id="product-tags" placeholder="Wireless, Gaming, RGB" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="product-description">Description</label>
+                            <textarea id="product-description" rows="3" required></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit">Add Product</button>
+                </form>
+            </section>
+        </section>
+
+        <!-- BONUS 1: PRODUCT DETAILS -->
+        <aside id="details-panel" hidden>
+            <h2>Product Details</h2>
+            <div id="details-content">
+                <!-- Generate details of the selected product using JavaScript -->
+            </div>
+        </aside>
+
+    </main>
+</body>
+
+</html>
