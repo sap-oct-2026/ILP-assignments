@@ -89,22 +89,36 @@ const products = [
 
 const productsBody = document.querySelector("#products-body");
 const productCount = document.querySelector("#product-count");
+const detailsPanel = document.querySelector("#details-panel");
+const detailsContent = document.querySelector("#details-content");
+const closeButton = document.querySelector("#close-button");
+const productForm = document.querySelector("#product-form");
 
-productCount.textContent = `Total: ${products.length}`;
+function renderList() {
+  productCount.textContent = `Total: ${products.length}`;
 
-products.forEach((product, i) => {
-  let availabilityText = "In Stock";
-  if (product.stock.store + product.stock.warehouse <= 0) {
-    availabilityText = "Out of stock";
-  }
+  productsBody.innerHTML = "";
+  products.forEach((product, i) => {
+    let availabilityText = "In Stock";
+    if (product.stock.store + product.stock.warehouse <= 0) {
+      availabilityText = "Out of stock";
+    }
 
-  productsBody.innerHTML += `<tr>
+    productsBody.innerHTML += `<tr>
                             <td>${product.name}</td>
                             <td>${product.category}</td>
                             <td class="price-cell">${product.price.toFixed(2)} €</td>
                             <td>${availabilityText}</td>
                             <td><button data-index="${i}">Details</button></td>
                         </tr>`;
+  });
+}
+
+renderList();
+
+closeButton.addEventListener("click", () => {
+  detailsPanel.style.right = "-400px";
+  detailsPanel.style.backgroundColor = "white";
 });
 
 productsBody.addEventListener("click", (event) => {
@@ -117,4 +131,68 @@ productsBody.addEventListener("click", (event) => {
   // Now I know exactly which product
   // was clicked and it is in the product variable
   console.log(product);
+
+  detailsPanel.style.right = "10px";
+  detailsPanel.style.backgroundColor = "#FF0000";
+
+  detailsContent.innerHTML = `
+  <p>Name: ${product.name}</p>
+  <p>Description: ${product.description}</p>
+  <p>Stock WH: ${product.stock.warehouse}<br>Stock store: ${product.stock.store}</p>
+  <p>Color: ${product.specs.color}</p>`;
+});
+
+productForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const productName = document.querySelector("#product-name");
+  const productCategory = document.querySelector("#product-category");
+  const productPrice = document.querySelector("#product-price");
+  const productBrand = document.querySelector("#product-brand");
+  const productColor = document.querySelector("#product-color");
+  const productWarranty = document.querySelector("#product-warranty");
+  const productStoreStock = document.querySelector("#product-store-stock");
+  const productWarehouseStock = document.querySelector(
+    "#product-warehouse-stock",
+  );
+  const productTags = document.querySelector("#product-tags");
+  const productDescription = document.querySelector("#product-description");
+
+  let tags = productTags.value.split(",");
+  tags = tags.map((value) => {
+    return value.trim();
+  });
+  console.log(tags);
+
+  // Find the highest id:
+  let maxId = 0;
+  products.forEach((product) => {
+    if (product.id > maxId) {
+      maxId = product.id;
+    }
+  });
+  console.log(maxId);
+
+  const newProduct = {
+    id: maxId + 1,
+    name: productName.value,
+    category: productCategory.value,
+    price: Number(productPrice.value),
+    stock: {
+      store: Number(productStoreStock.value),
+      warehouse: Number(productWarehouseStock.value),
+    },
+    specs: {
+      brand: productBrand.value,
+      color: productColor.value,
+      warranty: Number(productWarranty.value),
+    },
+    tags,
+    description: productDescription.value,
+  };
+
+  products.push(newProduct);
+  renderList();
+
+  productForm.reset();
 });

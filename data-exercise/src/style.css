@@ -79,16 +79,22 @@ button:hover {
 /* BONUS 1: PRODUCT DETAILS PANEL */
 
 #details-panel {
-  width: 280px;
+  width: 400px;
+  height: 100vh;
   flex-shrink: 0;
   padding: 24px;
   background: white;
   border-radius: 10px;
   box-shadow: 0 2px 8px #00000012;
-}
+  
+  position: fixed;
+  
+  bottom: 0;
+  right: -400px;
 
-#details-panel[hidden] {
-  display: none;
+  transition: 400ms;
+
+  opacity: 0.9;
 }
 
 #details-content p {
@@ -164,4 +170,13 @@ button:hover {
   .form-grid {
     grid-template-columns: 1fr;
   }
+}
+
+#linkToGoogle {
+  background-color: red;
+}
+
+#linkToGoogle:hover {
+  font-size: 50px;
+  transition: 3s;
 }
